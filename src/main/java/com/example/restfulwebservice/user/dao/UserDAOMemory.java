@@ -13,9 +13,9 @@ public class UserDAOMemory implements UserDAO {
     private static List<User> users = new ArrayList<>();
 
     static {
-        users.add(new User(1,"ljw",new Date()));
-        users.add(new User(2,"kty",new Date()));
-        users.add(new User(3,"kji",new Date()));
+        users.add(new User((long) 1,"ljw",new Date()));
+        users.add(new User((long) 2,"kty",new Date()));
+        users.add(new User((long) 3,"kji",new Date()));
     }
 
 
