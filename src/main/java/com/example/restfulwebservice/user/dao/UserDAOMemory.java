@@ -1,11 +1,13 @@
 package com.example.restfulwebservice.user.dao;
 
 import com.example.restfulwebservice.user.User;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@Component
 public class UserDAOMemory implements UserDAO {
 
     private static List<User> users = new ArrayList<>();
@@ -18,12 +20,12 @@ public class UserDAOMemory implements UserDAO {
 
 
     @Override
-    public List<User> find() {
+    public List<User> selectAll() {
         return users;
     }
 
     @Override
-    public User find(long id) {
+    public User select(long id) {
 
         for (User user: users)
             if (user.getId()==id)
@@ -33,7 +35,7 @@ public class UserDAOMemory implements UserDAO {
     }
 
     @Override
-    public User save(User user) {
+    public User insert(User user) {
         if (user.getId()==null)
             user.setId((long) (users.size()+1));
         users.add(user);

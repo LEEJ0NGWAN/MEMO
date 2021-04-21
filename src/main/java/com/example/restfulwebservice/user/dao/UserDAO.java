@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface UserDAO {
 
-    public List<User> find();
-    public User find(long id);
-    public User save(User user);
+    public List<User> selectAll();
+    public User select(long id);
+    public User insert(User user);
 }
