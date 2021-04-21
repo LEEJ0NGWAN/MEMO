@@ -10,8 +10,17 @@ public class HelloController {
      * [GET] hello
      */
     // RequestMapping(mehod=RequestMethod.GET, path="/hello")
-    @GetMapping("/hello")
+    @GetMapping(path="/hello")
     public String hello() {
         return "hello";
+    }
+
+    /**
+     * [GET] hello-bean
+     * @return
+     */
+    @GetMapping(path="/hello-bean")
+    public HelloBean helloBean() {
+        return new HelloBean("hihi");
     }
 }
