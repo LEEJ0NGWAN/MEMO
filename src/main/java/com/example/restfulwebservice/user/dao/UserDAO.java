@@ -10,4 +10,5 @@ public interface UserDAO {
     public User select(long id);
     public User insert(User user);
     public User delete(long id);
+    public User update(User user);
 }

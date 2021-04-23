@@ -3,6 +3,7 @@ package com.example.restfulwebservice.user;
 import com.example.restfulwebservice.user.exception.UserNotFoundException;
 import com.example.restfulwebservice.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -36,6 +37,7 @@ public class UserController {
 
     @PostMapping(path = "/users")
     public ResponseEntity<User> createUser(@RequestBody User user) {
+
         User savedUser = userService.save(user);
 
         URI location = ServletUriComponentsBuilder
@@ -54,5 +56,16 @@ public class UserController {
         if (user == null)
             throw new UserNotFoundException(String.format("id=%d not found",id));
 
+    }
+
+    @PutMapping(path = "/users")
+    public ResponseEntity<User> modifyUser(@RequestBody User user) {
+
+        User modifiedUser = userService.modify(user);
+
+        if (user == null)
+            throw new UserNotFoundException(String.format("id=%d not found",id));
+
+        return new ResponseEntity(user, HttpStatus.OK);
     }
 }

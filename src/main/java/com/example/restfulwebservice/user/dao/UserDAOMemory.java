@@ -57,4 +57,20 @@ public class UserDAOMemory implements UserDAO {
         }
         return null;
     }
+
+    @Override
+    public User update(User user) {
+        if (user == null) return null;
+
+        Iterator<User> iter = users.iterator();
+        while (iter.hasNext()) {
+            User next = iter.next();
+            if (next.getId() == user.getId()) {
+                next.setJoinDate(next.getJoinDate());
+                next.setName(next.getName());
+                break;
+            }
+        }
+        return user;
+    }
 }
