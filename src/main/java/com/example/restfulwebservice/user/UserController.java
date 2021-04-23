@@ -1,5 +1,6 @@
 package com.example.restfulwebservice.user;
 
+import com.example.restfulwebservice.user.exception.UserNotFoundException;
 import com.example.restfulwebservice.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +27,10 @@ public class UserController {
 
     @GetMapping(path = "/users/{id}")
     public User retrieveUser(@PathVariable Long id) {
+        User user = userService.find(id);
+        if (user == null)
+            throw new UserNotFoundException(String.format("id=%d not found",id));
+
         return userService.find(id);
     }
 
