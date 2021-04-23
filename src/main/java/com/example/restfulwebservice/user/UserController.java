@@ -2,9 +2,7 @@ package com.example.restfulwebservice.user;
 
 import com.example.restfulwebservice.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,6 +24,12 @@ public class UserController {
     @GetMapping(path = "/users/{id}")
     public User retrieveUser(@PathVariable Long id) {
         return userService.find(id);
+    }
+
+    @PostMapping(path = "/users")
+    public void createUser(@RequestBody User user) {
+        User savedUser = userService.save(user);
+
     }
 
 }
