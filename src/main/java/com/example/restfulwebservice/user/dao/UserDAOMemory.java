@@ -38,6 +38,8 @@ public class UserDAOMemory implements UserDAO {
     public User insert(User user) {
         if (user.getId()==null)
             user.setId((long) (users.size()+1));
+        if (user.getJoinDate()==null)
+            user.setJoinDate(new Date());
         users.add(user);
         return user;
     }
