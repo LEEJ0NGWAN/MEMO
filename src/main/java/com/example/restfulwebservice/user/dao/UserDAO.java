@@ -9,4 +9,5 @@ public interface UserDAO {
     public List<User> selectAll();
     public User select(long id);
     public User insert(User user);
+    public User delete(long id);
 }

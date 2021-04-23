@@ -31,4 +31,9 @@ public class UserServiceImpl implements UserService {
     public User save(User user) {
         return userDAO.insert(user);
     }
+
+    @Override
+    public User delete(Long id) {
+        return userDAO.delete(id);
+    }
 }
