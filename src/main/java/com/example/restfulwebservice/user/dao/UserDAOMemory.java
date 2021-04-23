@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 @Component
@@ -41,6 +42,35 @@ public class UserDAOMemory implements UserDAO {
         if (user.getJoinDate()==null)
             user.setJoinDate(new Date());
         users.add(user);
+        return user;
+    }
+
+    @Override
+    public User delete(long id) {
+        Iterator<User> iter = users.iterator();
+        while (iter.hasNext()) {
+            User user = iter.next();
+            if (user.getId() == id) {
+                iter.remove();
+                return user;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public User update(User user) {
+        if (user == null) return null;
+
+        Iterator<User> iter = users.iterator();
+        while (iter.hasNext()) {
+            User next = iter.next();
+            if (next.getId() == user.getId()) {
+                next.setJoinDate(next.getJoinDate());
+                next.setName(next.getName());
+                break;
+            }
+        }
         return user;
     }
 }
