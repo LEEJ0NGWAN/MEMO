@@ -148,6 +148,11 @@ e.g., aop setting
 public class ...
 ```
 
+# ResponseEntityExceptionHandler
+
+Controller에서 발생하는 예외에 대해 적절한 http status코드와 함께 리스폰스를 반환 및 에러 핸들링하도록 돕는 베이스 클래스
+
+
 # @ExceptionHandler
 
 어떤 메소드 또는 클래스가 어떤 예외를 다루는 핸들러라는 것을 나타내는 애노테이션
@@ -160,3 +165,65 @@ public final ResponseEntity<Object> handleAllExceptions(Exception exception, Web
 		...
 }
 ```
+
+# Validation
+
+ORM 관련하여 Entity에 여러 제약사항을 편리하게 추가시켜주는 애노테이션을 제공
+
+SpringBoot 2.3.0부터 starter web 의존성에 spring-boot-starter-validation이 제외 되었다
+
+→ pom.xml 또는 build.gradle 에 추가적으로 spring-boot-starter-validation을 추가해줘야 한다
+
+**pom.xml**
+
+```java
+<dependencies>
+
+	...
+
+	<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-validation</artifactId>
+	</dependency>
+
+	...
+
+</dependencies>
+```
+
+**build.gradle**
+
+```java
+dependencies {
+
+	...
+
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	
+	...
+
+}
+```
+
+## @Valid
+
+부착 대상이 되는 어떤 객체의 유효성을 검사하는 애노테이션
+
+프로퍼티, 메소드 파라매터, 리턴 타입이 되는 객체 등에 부착될 수 있다
+
+e.g.,
+
+user 생성 api에서 리퀘스트 json 유효성 검사
+
+```java
+@PostMapping(path="/users")
+public ResponseEntity<User> createUser(@Valid @RequestBody User user) {
+
+	...
+
+}
+```
+
+### MethodArgumentNotValidException
+
+@Valid 애노테이션의 유효성 검사를 통과하지 못하면 발생하는 Exception
