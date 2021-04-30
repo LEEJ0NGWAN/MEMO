@@ -227,3 +227,54 @@ public ResponseEntity<User> createUser(@Valid @RequestBody User user) {
 ### MethodArgumentNotValidException
 
 @Valid 애노테이션의 유효성 검사를 통과하지 못하면 발생하는 Exception
+
+
+# XML response body
+
+### request Headers : Accept
+
+request에 Accept 헤더를 설정하는 것을 통해 리스폰스로 허용할 데이터 타입 지정 가능
+
+- application/json
+
+    rest api 리스폰스 바디로 흔하게 사용되는 json
+
+- application/xml
+
+    xml 폼으로 전송
+
+### Jackson
+
+리스폰스 바디 타입으로 xml을 사용할 수 있도록 지원하는 의존성
+
+**pom.xml**
+
+```java
+<dependencies>
+
+	...
+
+	<dependency>
+		<groupId>com.fasterxml.jackson.dataformat</groupId>
+		<artifactId>jackson-dataformat-xml</artifactId>
+	</dependency>
+
+	...
+
+</dependencies>
+```
+
+**build.gradle**
+
+```java
+dependencies {
+
+	...
+
+	implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml'
+	
+	...
+
+}
+```
+
