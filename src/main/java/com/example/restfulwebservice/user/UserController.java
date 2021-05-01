@@ -13,6 +13,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
+@RequestMapping(produces = "application/json")
 public class UserController {
 
     private UserService userService;
@@ -28,12 +29,12 @@ public class UserController {
     }
 
     @GetMapping(path = "/users/{id}")
-    public User retrieveUser(@PathVariable Long id) {
+    public ResponseEntity<User> retrieveUser(@PathVariable Long id) {
         User user = userService.find(id);
         if (user == null)
             throw new UserNotFoundException(String.format("id=%d not found",id));
 
-        return userService.find(id);
+        return ResponseEntity.ok(user);
     }
 
     @PostMapping(path = "/users")
