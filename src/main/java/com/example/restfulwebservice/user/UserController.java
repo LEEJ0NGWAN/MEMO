@@ -3,14 +3,18 @@ package com.example.restfulwebservice.user;
 import com.example.restfulwebservice.user.exception.UserNotFoundException;
 import com.example.restfulwebservice.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.hateoas.EntityModel;
 
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 
 @RestController
 @RequestMapping(produces = "application/json")
@@ -29,12 +33,18 @@ public class UserController {
     }
 
     @GetMapping(path = "/users/{id}")
-    public ResponseEntity<User> retrieveUser(@PathVariable Long id) {
+    public EntityModel<User> retrieveUser(@PathVariable Long id) {
         User user = userService.find(id);
         if (user == null)
             throw new UserNotFoundException(String.format("id=%d not found",id));
 
-        return ResponseEntity.ok(user);
+         // HATEOAS
+        EntityModel<User> userEntityModel = EntityModel.of(user);
+        WebMvcLinkBuilder linkTo = linkTo(methodOn(this.getClass()).retrieveAllUsers());
+
+        userEntityModel.add(linkTo.withRel("all-users"));
+
+        return userEntityModel;
     }
 
     @PostMapping(path = "/users")
