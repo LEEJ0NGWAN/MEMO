@@ -13,6 +13,12 @@ spring:
       name: username
       password: password
 
+jpa:
+  show-sql: true
+h2:
+  console:
+    enable: true
+
 management:
   endpoints:
     web:
