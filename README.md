@@ -14,4 +14,6 @@ rest 웹 서비스 연습용 스프링 부트 프로젝트입니다.
 - [version](./version.md)
 - [HATEOAS](./hateoas.md)
 - [Swagger](./swagger.md)
+- [JPA](./jpa.md)
+
 
