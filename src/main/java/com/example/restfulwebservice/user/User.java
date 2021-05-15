@@ -8,9 +8,11 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.lang.Nullable;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -36,6 +38,7 @@ public class User {
 
     @Past
     @ApiModelProperty("사용자 등록일")
+    @Nullable
     private Date joinDate;
 
 //    @JsonIgnore
