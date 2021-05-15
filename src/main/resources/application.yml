@@ -1,13 +1,23 @@
 server:
   port: 80
 
+
+h2:
+  console:
+    enable: true
+
 #logging:
 #  level:
 #    org.springframework: DEBUG
 
 spring:
+  datasource:
+    url: jdbc:h2:mem:testmem # 메모리 db
+#    url: jdbc:h2:~/test     # 로컬 db
   jpa:
     show-sql: true
+    hibernate:
+      ddl-auto: update
   messages:
     basename: messages
   security:
@@ -15,11 +25,7 @@ spring:
       name: username
       password: password
 
-jpa:
-  show-sql: true
-h2:
-  console:
-    enable: true
+
 
 management:
   endpoints:
