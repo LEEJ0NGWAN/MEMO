@@ -62,12 +62,16 @@ public class UserController {
     }
 
     @DeleteMapping(path = "/users/{id}")
-    public void deleteUser(@PathVariable Long id) {
-        User user = userService.delete(id);
+    public ResponseEntity<?> deleteUser(@PathVariable Long id) {
+
+        User user = userService.find(id);
 
         if (user == null)
             throw new UserNotFoundException(String.format("id=%d not found",id));
 
+        userService.delete(id);
+
+        return ResponseEntity.ok().build();
     }
 
     @PutMapping(path = "/users")
