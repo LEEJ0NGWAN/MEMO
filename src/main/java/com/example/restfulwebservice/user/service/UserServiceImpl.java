@@ -1,7 +1,7 @@
 package com.example.restfulwebservice.user.service;
 
 import com.example.restfulwebservice.user.User;
-import com.example.restfulwebservice.user.dao.UserDAO;
+import com.example.restfulwebservice.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,35 +10,35 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
 
-    private UserDAO userDAO;
+    private UserRepository userRepository;
 
     @Autowired
-    public UserServiceImpl(UserDAO userDAO) {
-        this.userDAO = userDAO;
+    public UserServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     @Override
     public List<User> findAll() {
-        return userDAO.selectAll();
+        return userRepository.findAll();
     }
 
     @Override
     public User find(Long id) {
-        return userDAO.select(id);
+        return userRepository.findById(id).orElse(null);
     }
 
     @Override
     public User save(User user) {
-        return userDAO.insert(user);
+        return userRepository.save(user);
     }
 
     @Override
-    public User delete(Long id) {
-        return userDAO.delete(id);
+    public void delete(Long id) {
+        userRepository.deleteById(id);
     }
 
     @Override
     public User modify(User user) {
-        return userDAO.update(user);
+        return userRepository.save(user);
     }
 }
