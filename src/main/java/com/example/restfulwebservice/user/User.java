@@ -1,5 +1,6 @@
 package com.example.restfulwebservice.user;
 
+import com.example.restfulwebservice.post.Post;
 import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -11,11 +12,9 @@ import lombok.NoArgsConstructor;
 import org.springframework.lang.Nullable;
 
 import java.util.Date;
+import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
@@ -47,4 +46,15 @@ public class User {
 //    @JsonIgnore
     @ApiModelProperty("사용자 ssd")
     private String ssd;
+
+    @OneToMany(mappedBy = "user")
+    private List<Post> posts;
+
+    public User (Long id, String name, Date joinDate, String password, String ssd) {
+        this.id = id;
+        this.name = name;
+        this.joinDate = joinDate;
+        this.password = password;
+        this.ssd = ssd;
+    }
 }
